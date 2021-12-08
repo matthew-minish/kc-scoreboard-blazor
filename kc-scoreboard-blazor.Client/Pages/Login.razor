@@ -35,6 +35,10 @@
     </NavLink>
 </EditForm>
 
+<div class="form-signin">
+    <button class="btn btn-lg btn-secondary btn-block" @onclick="LoginAsGuest">Continue as Guest</button>
+</div>
+
 @code{
     LoginParameters loginParameters { get; set; } = new LoginParameters();
     string error { get; set; }
@@ -45,6 +49,20 @@
         try
         {
             await authStateProvider.Login(loginParameters);
+            navigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    async Task LoginAsGuest()
+    {
+        error = null;
+        try
+        {
+            await authStateProvider.Login(new LoginParameters() { UserName = "Guest", Password = "ajAOSIJD4589AS(*jdoija", RememberMe = true});
             navigationManager.NavigateTo("");
         }
         catch (Exception ex)

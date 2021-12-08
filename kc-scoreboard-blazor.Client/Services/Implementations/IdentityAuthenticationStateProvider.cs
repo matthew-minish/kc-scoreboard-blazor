@@ -29,12 +29,6 @@ namespace kc_scoreboard_blazor.Client.States
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
-        public async Task Register(RegisterParameters registerParameters)
-        {
-            await _authorizeApi.Register(registerParameters);
-            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
-        }
-
         public async Task Logout()
         {
             await _authorizeApi.Logout();

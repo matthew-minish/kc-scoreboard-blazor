@@ -34,22 +34,6 @@ namespace kc_scoreboard_blazor.Server.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterParameters parameters)
-        {
-            var user = new ApplicationUser();
-            user.UserName = parameters.UserName;
-            var result = await _userManager.CreateAsync(user, parameters.Password);
-            if (!result.Succeeded) return BadRequest(result.Errors.FirstOrDefault()?.Description);
-
-            return await Login(new LoginParameters
-            {
-                UserName = parameters.UserName,
-                Password = parameters.Password
-            });
-        }
-
-        [Authorize]
-        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
